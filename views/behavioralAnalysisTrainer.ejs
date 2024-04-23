@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="en">
+
+<head>
+    <title>Behavioral Analysis</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/public/cdn-cgi/apps/head/3ts2ksMwXvKRuG480KNifJ2_JNM.js"></script>
+    <link rel="icon" href="images/TWT.ico" type="images/x-icon">
+    <link rel="stylesheet" type="text/css" href="/public/css?family=Poppins:300,400,500,600,700,900%7CLato%7CKalam:300,400,700">
+    <link rel="stylesheet" href="/public/styles/bootstrap.css">
+    <link rel="stylesheet" href="/public/styles/fonts.css">
+    <link rel="stylesheet" href="/public/styles/style.css">
+    <link rel="stylesheet" href="/public/styles/behavioralAnalysisTrainer.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="preloader-body">
+            <div class="cssload-bell">
+                <div class="cssload-circle">
+                    <div class="cssload-inner"></div>
+                </div>
+                <div class="cssload-circle">
+                    <div class="cssload-inner"></div>
+                </div>
+                <div class="cssload-circle">
+                    <div class="cssload-inner"></div>
+                </div>
+                <div class="cssload-circle">
+                    <div class="cssload-inner"></div>
+                </div>
+                <div class="cssload-circle">
+                    <div class="cssload-inner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page">
+        <!-- Page Header-->
+        <header class="section page-header">
+            <!-- RD Navbar-->
+            <div class="rd-navbar-wrap">
+                <nav class="rd-navbar rd-navbar-modern" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up-offset="100px" data-xl-stick-up-offset="120px" data-xxl-stick-up-offset="140px" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true">
+                    <div class="rd-navbar-collapse-toggle rd-navbar-fixed-element-1" data-rd-navbar-toggle=".rd-navbar-collapse"><span></span></div>
+                    <div class="rd-navbar-aside-outer">
+                        <div class="rd-navbar-aside">
+                            <div class="rd-navbar-collapse">
+                                <div class="contacts-ruth">
+                                    <div class="unit unit-spacing-xs align-items-center">
+                                        <div class="unit-left"><span class="linear-icon icon linearicons-map-marker"></span></div>
+                                        <div class="unit-body"><a href="https://www.google.com/maps/dir/Current+Location/108+University+Ave,+Waterloo,+ON+N2J+2W2" target="_blank">108 University Ave<br>Waterloo, ON N2J 2W2</a></div>
+                                    </div>
+                                </div><a class="button button-primary-outline button-sm button-icon button-icon-left" href="#"><span class="icon mdi mdi-email-outline icon-size-m"></span>Book Training</a>
+                            </div>
+                            <!-- RD Navbar Panel-->
+                            <div class="rd-navbar-panel">
+                                <!-- RD Navbar Toggle-->
+                                <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+                                <!-- RD Navbar Brand-->
+                                <div class="rd-navbar-brand"><a class="brand" href="/home">TrainWithTail</a>
+                                </div>
+                            </div>
+                            <% if (session.username) { %>
+                                <% if (session.role === 'Customer') { %>
+                                    <div class="rd-navbar-button"><a class="button button-primary-outline button-sm button-icon button-icon-left" href="/ContactForm"><span class="icon mdi mdi-email-outline icon-size-m"></span>Book Training</a></div>
+                                <% } else if (session.role === 'Trainer') { %>
+                                    <div class="rd-navbar-button"></div>
+                                <% } %>
+                            <% } else { %>
+                                <div class="rd-navbar-button"><a class="button button-primary-outline button-sm button-icon button-icon-left" href="/ContactForm"><span class="icon mdi mdi-email-outline icon-size-m"></span>Book Training</a></div>
+                            <% } %>
+                        </div>
+                    </div>
+                    <div class="rd-navbar-main-outer">
+                        <div class="rd-navbar-main">
+                            <div class="rd-navbar-nav-wrap">
+                                <!-- RD Navbar Nav-->
+                                <ul class="rd-navbar-nav">
+                                    <% if (session.username) { %>
+                                        <% if (session.role === 'Customer') { %>
+                                            <li class="rd-nav-item active"><a class="rd-nav-link" href="/home">Home</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="/Buy">Shop</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="/aboutus">About Us</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="">Behavioral Analysis</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="">Progress Check</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="/logout-success">Logout</a>
+                                            </li>
+                                        <% } else if (session.role === 'Trainer') { %>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="/home">Home</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="/aboutus">About Us</a>
+                                            </li>
+                                            <li class="rd-nav-item active"><a class="rd-nav-link" href="/behavioralAnalysisTrainer">Behavioral Analysis</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="/progressCheckTrainer">Progress Check</a>
+                                            </li>
+                                            <li class="rd-nav-item"><a class="rd-nav-link" href="/logout-success">Logout</a>
+                                            </li>
+                                        <% } %>
+                                    <% } else { %>
+                                        <li class="rd-nav-item active"><a class="rd-nav-link" href="/home">Home</a>
+                                        </li>
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="/Buy">Shop</a>
+                                        </li>
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="/aboutus">About Us</a>
+                                        </li>
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="/customerlogin">Pet Parent Login</a>
+                                        </li>
+                                        <li class="rd-nav-item"><a class="rd-nav-link" href="/trainerlogin">Trainer Login</a>
+                                        </li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <h4>Categories</h4>
+
+        <!-- Dropdown for selecting pet parent username and petname -->
+
+
+        <label for="selectedUserPet" style="color: chocolate;"><b>Select Pet Parent Username and Petname:</b></label>
+        <select name="selectedUserPet" id="selectedUserPet" required>
+            <option>Select User_Pet</option>
+            <% users.forEach(function(user) { %>
+                <% if (user.role === 'Customer') { %>
+                    <option value="<%= user.name %>_<%= user.petName %>" <% if (user.name + '_' + user.petName === selectedUserPet) { %> selected <% } %>>
+                        <%= user.name %>_<%= user.petName %>
+                    </option>
+                <% } %>
+            <% }); %>
+        </select>
+        
+
+
+        <div class="behaviorContainer">
+            
+            <form id="behaviorFormJumping" class="behavior-behavior" action="/submitBehavior" method="POST">
+                <h2>Behavior: Jumping</h2>
+                <input type="hidden" name="behaviorUser" id="behaviorUserJumping" value="">
+                <input type="hidden" name="behaviorPet" id="behaviorPetJumping" value="">
+                <img src="images/Jumping.jpeg" alt="Jumping">
+                <input type="hidden" name="behaviorImg" value="images/Jumping.jpeg">
+                <div class="behavior-details">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Description:</b> Avoidance training to discourage jumping on people.</p>
+                    <input type="hidden" name="behaviorDesc" value=" Avoidance training to discourage jumping on people.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Objective:</b> Reduce jumping behavior when greeting people.</p>
+                    <input type="hidden" name="behaviorObj" value=" Reduce jumping behavior when greeting people.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Techniques Used:</b> Positive reinforcement, redirection.</p>
+                    <input type="hidden" name="behaviorTech" value=" Positive reinforcement, redirection.">
+                    <div class="behavior-status">
+                        <p style="color: darkgoldenrod;"><b>Status:</b></p>
+                        <% const filteredBehaviors1 = behaviors.filter(behavior => behavior.behaviorUser === petUser && behavior.behaviorName === "Jumping"); %>
+                        <% if (filteredBehaviors1.length > 0) { %>
+                            <% const behavior = filteredBehaviors1[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <input type="radio" id="behavior1-not-started" name="progress" value="not-started" <%= notStartedChecked %>><label for="behavior1-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior1-in-progress" name="progress" value="in-progress" <%= inProgressChecked %>><label for="behavior1-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior1-completed" name="progress" value="completed" <%= completedChecked %>><label for="behavior1-completed"> Completed</label><br>
+                        <% } else { %>
+                            <input type="radio" id="behavior1-not-started" name="progress" value="not-started"><label for="behavior1-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior1-in-progress" name="progress" value="in-progress"><label for="behavior1-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior1-completed" name="progress" value="completed"><label for="behavior1-completed"> Completed</label><br>
+                        <% } %>  
+                    </div>
+
+                    <div style="display: flex; align-items: center; padding-left: 20px;">
+                        <label for="behavior1-comments" style="color: darkgoldenrod; margin: 10px;"><b>Comments:</b></label>
+                        <% if (filteredBehaviors1.length > 0) { %>
+                            <% const behavior = filteredBehaviors1[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <textarea class="notes" id="behavior1-comments" name="comments" placeholder="Enter comments..."><%= behavior.comments %></textarea>
+                        <% } else { %>
+                            <textarea class="notes" id="behavior1-comments" name="comments" placeholder="Enter comments..."></textarea>
+                        <% } %>
+                    </div>
+                </div>
+                <input type="hidden" name="behaviorName" value="Jumping">
+                <button type="submit" style="margin: 20px; padding: 10px 20px; background-color:#04b89afa; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+            </form>
+
+            <form id="behaviorFormBarking" class="behavior-behavior" action="/submitBehavior" method="POST">
+                <h2>Behavior: Barking</h2>
+                <input type="hidden" name="behaviorUser" id="behaviorUserBarking" value="">
+                <input type="hidden" name="behaviorPet" id="behaviorPetBarking" value="">
+                <img src="images/Barking.jpeg" alt="Barking">
+                <input type="hidden" name="behaviorImg" value="images/Barking.jpeg">
+                <div class="behavior-details">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Description:</b> Training to reduce excessive barking.</p>
+                    <input type="hidden" name="behaviorDesc" value=" Training to reduce excessive barking.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Objective:</b> Decrease barking frequency and intensity.</p>
+                    <input type="hidden" name="behaviorObj" value=" Decrease barking frequency and intensity.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Techniques Used:</b> Desensitization, positive reinforcement.</p>
+                    <input type="hidden" name="behaviorTech" value=" Desensitization, positive reinforcement.">
+                    <div class="behavior-status">
+                        <p style="color: darkgoldenrod;"><b>Status:</b></p>
+
+                        <% const filteredBehaviors2 = behaviors.filter(behavior => behavior.behaviorUser === petUser && behavior.behaviorName === "Barking"); %>
+                        <% if (filteredBehaviors2.length > 0) { %>
+                            <% const behavior = filteredBehaviors2[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <input type="radio" id="behavior2-not-started" name="progress" value="not-started" <%= notStartedChecked %>><label for="behavior2-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior2-in-progress" name="progress" value="in-progress" <%= inProgressChecked %>><label for="behavior2-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior2-completed" name="progress" value="completed" <%= completedChecked %>><label for="behavior2-completed"> Completed</label><br>
+                        <% } else { %>
+                            <input type="radio" id="behavior2-not-started" name="progress" value="not-started"><label for="behavior2-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior2-in-progress" name="progress" value="in-progress"><label for="behavior2-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior2-completed" name="progress" value="completed"><label for="behavior2-completed"> Completed</label><br>
+                        <% } %>    
+                    </div>
+                    <div style="display: flex; align-items: center; padding-left: 20px;">
+                        <label for="behavior2-comments" style="color: darkgoldenrod; margin: 10px;"><b>Comments:</b></label>
+                        <% if (filteredBehaviors2.length > 0) { %>
+                            <% const behavior = filteredBehaviors2[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <textarea class="notes" id="behavior2-comments" name="comments" placeholder="Enter comments..."><%= behavior.comments %></textarea>
+                        <% } else { %>
+                            <textarea class="notes" id="behavior2-comments" name="comments" placeholder="Enter comments..."></textarea>
+                        <% } %>
+                    </div>
+                </div>
+                <input type="hidden" name="behaviorName" value="Barking">
+                <button type="submit" style="margin: 20px; padding: 10px 20px; background-color:#04b89afa; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+            </form>
+
+            <form id="behaviorFormChewing" class="behavior-behavior" action="/submitBehavior" method="POST">
+                <h2>Behavior: Chewing</h2>
+                <input type="hidden" name="behaviorUser" id="behaviorUserChewing" value="">
+                <input type="hidden" name="behaviorPet" id="behaviorPetChewing" value="">
+                <img src="images/Chewing.jpeg" alt="Chewing">
+                <input type="hidden" name="behaviorImg" value="images/Chewing.jpeg">
+                <div class="behavior-details">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Description:</b> Redirecting chewing behavior towards appropriate items.</p>
+                    <input type="hidden" name="behaviorDesc" value=" Redirecting chewing behavior towards appropriate items.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Objective:</b> Prevent destructive chewing on furniture and belongings.</p>
+                    <input type="hidden" name="behaviorObj" value=" Prevent destructive chewing on furniture and belongings.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Techniques Used:</b> Provide chew toys, positive reinforcement.</p>
+                    <input type="hidden" name="behaviorTech" value=" Provide chew toys, positive reinforcement.">
+                    <div class="behavior-status">
+                        <p style="color: darkgoldenrod;"><b>Status:</b></p>
+                        <% const filteredBehaviors3 = behaviors.filter(behavior => behavior.behaviorUser === petUser && behavior.behaviorName === "Chewing"); %>
+                        <% if (filteredBehaviors3.length > 0) { %>
+                            <% const behavior = filteredBehaviors3[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <input type="radio" id="behavior3-not-started" name="progress" value="not-started" <%= notStartedChecked %>><label for="behavior3-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior3-in-progress" name="progress" value="in-progress" <%= inProgressChecked %>><label for="behavior3-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior3-completed" name="progress" value="completed" <%= completedChecked %>><label for="behavior3-completed"> Completed</label><br>
+                        <% } else { %>
+                            <input type="radio" id="behavior3-not-started" name="progress" value="not-started"><label for="behavior3-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior3-in-progress" name="progress" value="in-progress"><label for="behavior3-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior3-completed" name="progress" value="completed"><label for="behavior3-completed"> Completed</label><br>
+                        <% } %>
+                    </div>
+                    <div style="display: flex; align-items: center; padding-left: 20px;">
+                        <label for="behavior3-comments" style="color: darkgoldenrod; margin: 10px;"><b>Comments:</b></label>
+                        <% if (filteredBehaviors3.length > 0) { %>
+                            <% const behavior = filteredBehaviors3[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <textarea class="notes" id="behavior3-comments" name="comments" placeholder="Enter comments..."><%= behavior.comments %></textarea>
+                        <% } else { %>
+                            <textarea class="notes" id="behavior3-comments" name="comments" placeholder="Enter comments..."></textarea>
+                        <% } %>
+                    </div>
+                </div>
+                <input type="hidden" name="behaviorName" value="Chewing">
+                <button type="submit" style="margin: 20px; padding: 10px 20px; background-color:#04b89afa; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+            </form>
+
+            <form id="behaviorFormPulling" class="behavior-behavior" action="/submitBehavior" method="POST">
+                <h2>Behavior: Leash Pulling</h2>
+                <input type="hidden" name="behaviorUser" id="behaviorUserPulling" value="">
+                <input type="hidden" name="behaviorPet" id="behaviorPetPulling" value="">
+                <img src="images/Leash Pulling.jpeg" alt="Leash Pulling">
+                <input type="hidden" name="behaviorImg" value="images/Leash Pulling.jpeg">
+                <div class="behavior-details">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Description:</b> Training to stop pulling on the leash during walks.</p>
+                    <input type="hidden" name="behaviorDesc" value=" Training to stop pulling on the leash during walks.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Objective:</b> Teach the dog to walk calmly on a leash without pulling.</p>
+                    <input type="hidden" name="behaviorObj" value=" Teach the dog to walk calmly on a leash without pulling.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Techniques Used:</b> Loose leash walking techniques, positive reinforcement.</p>
+                    <input type="hidden" name="behaviorTech" value=" Loose leash walking techniques, positive reinforcement.">
+                    <div class="behavior-status">
+                        <p style="color: darkgoldenrod;"><b>Status:</b></p>
+                        <% const filteredBehaviors4 = behaviors.filter(behavior => behavior.behaviorUser === petUser && behavior.behaviorName === "Leash Pulling"); %>
+                        <% if (filteredBehaviors4.length > 0) { %>
+                            <% const behavior = filteredBehaviors4[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <input type="radio" id="behavior4-not-started" name="progress" value="not-started" <%= notStartedChecked %>><label for="behavior4-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior4-in-progress" name="progress" value="in-progress" <%= inProgressChecked %>><label for="behavior4-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior4-completed" name="progress" value="completed" <%= completedChecked %>><label for="behavior4-completed"> Completed</label><br>
+                        <% } else { %>
+                            <input type="radio" id="behavior4-not-started" name="progress" value="not-started"><label for="behavior4-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior4-in-progress" name="progress" value="in-progress"><label for="behavior4-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior4-completed" name="progress" value="completed"><label for="behavior4-completed"> Completed</label><br>
+                        <% } %>      
+                    </div>
+                    <div style="display: flex; align-items: center; padding-left: 20px;">
+                        <label for="behavior4-comments" style="color: darkgoldenrod; margin: 10px;"><b>Comments:</b></label>
+                        <% if (filteredBehaviors4.length > 0) { %>
+                            <% const behavior = filteredBehaviors4[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <textarea class="notes" id="behavior4-comments" name="comments" placeholder="Enter comments..."><%= behavior.comments %></textarea>
+                        <% } else { %>
+                            <textarea class="notes" id="behavior4-comments" name="comments" placeholder="Enter comments..."></textarea>
+                        <% } %>
+                    </div>
+                </div>
+                <input type="hidden" name="behaviorName" value="Leash Pulling">
+                <button type="submit" style="margin: 20px; padding: 10px 20px; background-color:#04b89afa; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+            </form>
+
+            <form id="behaviorFormSeparation" class="behavior-behavior" action="/submitBehavior" method="POST">
+                <h2>Behavior: Separation Anxiety</h2>
+                <input type="hidden" name="behaviorUser" id="behaviorUserSeparation" value="">
+                <input type="hidden" name="behaviorPet" id="behaviorPetSeparation" value="">
+                <img src="images/Seperation.jpeg" alt="Separation Anxiety">
+                <input type="hidden" name="behaviorImg" value="images/Seperation.jpeg">
+                <div class="behavior-details">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Description:</b> Addressing anxiety when left alone.</p>
+                    <input type="hidden" name="behaviorDesc" value=" Addressing anxiety when left alone.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Objective:</b> Help the dog cope with being alone without distress.</p>
+                    <input type="hidden" name="behaviorObj" value=" Help the dog cope with being alone without distress.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Techniques Used:</b> Desensitization, counter-conditioning, gradual exposure.</p>
+                    <input type="hidden" name="behaviorTech" value=" Desensitization, counter-conditioning, gradual exposure.">
+                    <div class="behavior-status">
+                        <p style="color: darkgoldenrod;"><b>Status:</b></p>
+                        <% const filteredBehaviors5 = behaviors.filter(behavior => behavior.behaviorUser === petUser && behavior.behaviorName === "Separation Anxiety"); %>
+                        <% if (filteredBehaviors5.length > 0) { %>
+                            <% const behavior = filteredBehaviors5[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <input type="radio" id="behavior5-not-started" name="progress" value="not-started" <%= notStartedChecked %>><label for="behavior5-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior5-in-progress" name="progress" value="in-progress" <%= inProgressChecked %>><label for="behavior5-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior5-completed" name="progress" value="completed" <%= completedChecked %>><label for="behavior5-completed"> Completed</label><br>
+                        <% } else { %>
+                            <input type="radio" id="behavior5-not-started" name="progress" value="not-started"><label for="behavior5-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior5-in-progress" name="progress" value="in-progress"><label for="behavior5-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior5-completed" name="progress" value="completed"><label for="behavior5-completed"> Completed</label><br>
+                        <% } %>       
+                    </div>
+                    <div style="display: flex; align-items: center; padding-left: 20px;">
+                        <label for="behavior5-comments" style="color: darkgoldenrod; margin: 10px;"><b>Comments:</b></label>
+                        <% if (filteredBehaviors5.length > 0) { %>
+                            <% const behavior = filteredBehaviors5[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <textarea class="notes" id="behavior5-comments" name="comments" placeholder="Enter comments..."><%= behavior.comments %></textarea>
+                        <% } else { %>
+                            <textarea class="notes" id="behavior5-comments" name="comments" placeholder="Enter comments..."></textarea>
+                        <% } %>
+                    </div>
+                </div>
+                <input type="hidden" name="behaviorName" value="Separation Anxiety">
+                <button type="submit" style="margin: 20px; padding: 10px 20px; background-color:#04b89afa; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+            </form>
+
+            <form id="behaviorFormGuarding" class="behavior-behavior" action="/submitBehavior" method="POST">
+                <h2>Behavior: Resource Guarding</h2>
+                <input type="hidden" name="behaviorUser" id="behaviorUserGuarding" value="">
+                <input type="hidden" name="behaviorPet" id="behaviorPetGuarding" value="">
+                <img src="images/Resource Gaurding.jpeg" alt="Resource Guarding">
+                <input type="hidden" name="behaviorImg" value="images/Resource Gaurding.jpeg">
+                <div class="behavior-details">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Description:</b> Addressing possessive behavior over objects or food.</p>
+                    <input type="hidden" name="behaviorDesc" value=" Addressing possessive behavior over objects or food.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Objective:</b> Teach the dog to share and not display aggression when approached near resources.</p>
+                    <input type="hidden" name="behaviorObj" value=" Teach the dog to share and not display aggression when approached near resources.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Techniques Used:</b> Desensitization, counter-conditioning, trading up.</p>
+                    <input type="hidden" name="behaviorTech" value=" Desensitization, counter-conditioning, trading up.">
+                    <div class="behavior-status">
+                        <p style="color: darkgoldenrod;"><b>Status:</b></p>
+                        <% const filteredBehaviors6 = behaviors.filter(behavior => behavior.behaviorUser === petUser && behavior.behaviorName === "Resource Guarding"); %>
+                        <% if (filteredBehaviors6.length > 0) { %>
+                            <% const behavior = filteredBehaviors6[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <input type="radio" id="behavior6-not-started" name="progress" value="not-started" <%= notStartedChecked %>><label for="behavior6-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior6-in-progress" name="progress" value="in-progress" <%= inProgressChecked %>><label for="behavior6-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior6-completed" name="progress" value="completed" <%= completedChecked %>><label for="behavior6-completed"> Completed</label><br>
+                        <% } else { %>
+                            <input type="radio" id="behavior6-not-started" name="progress" value="not-started"><label for="behavior6-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior6-in-progress" name="progress" value="in-progress"><label for="behavior6-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior6-completed" name="progress" value="completed"><label for="behavior6-completed"> Completed</label><br>
+                        <% } %>       
+                    </div>
+                    <div style="display: flex; align-items: center; padding-left: 20px;">
+                        <label for="behavior6-comments" style="color: darkgoldenrod; margin: 10px;"><b>Comments:</b></label>
+                        <% if (filteredBehaviors6.length > 0) { %>
+                            <% const behavior = filteredBehaviors6[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <textarea class="notes" id="behavior6-comments" name="comments" placeholder="Enter comments..."><%= behavior.comments %></textarea>
+                        <% } else { %>
+                            <textarea class="notes" id="behavior6-comments" name="comments" placeholder="Enter comments..."></textarea>
+                        <% } %>
+                    </div>
+                </div>
+                <input type="hidden" name="behaviorName" value="Resource Guarding">
+                <button type="submit" style="margin: 20px; padding: 10px 20px; background-color:#04b89afa; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+            </form>
+
+            <form id="behaviorFormSurfing" class="behavior-behavior" action="/submitBehavior" method="POST">
+                <h2>Behavior: Counter Surfing</h2>
+                <input type="hidden" name="behaviorUser" id="behaviorUserSurfing" value="">
+                <input type="hidden" name="behaviorPet" id="behaviorPetSurfing" value="">
+                <img src="images/Surfing.jpeg" alt="Counter Surfing">
+                <input type="hidden" name="behaviorImg" value="images/Surfing.jpeg">
+                <div class="behavior-details">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Description:</b> Training to prevent the dog from jumping on counters and tables to steal food.</p>
+                    <input type="hidden" name="behaviorDesc" value=" Training to prevent the dog from jumping on counters and tables to steal food.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Objective:</b> Discourage the behavior of scavenging for food on elevated surfaces.</p>
+                    <input type="hidden" name="behaviorObj" value=" Discourage the behavior of scavenging for food on elevated surfaces.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Techniques Used:</b> Management strategies, redirection, teaching an incompatible behavior.</p>
+                    <input type="hidden" name="behaviorTech" value=" Management strategies, redirection, teaching an incompatible behavior.">
+                    <div class="behavior-status">
+                        <p style="color: darkgoldenrod;"><b>Status:</b></p>
+                        <% const filteredBehaviors7 = behaviors.filter(behavior => behavior.behaviorUser === petUser && behavior.behaviorName === "Counter Surfing"); %>
+                        <% if (filteredBehaviors7.length > 0) { %>
+                            <% const behavior = filteredBehaviors7[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <input type="radio" id="behavior7-not-started" name="progress" value="not-started" <%= notStartedChecked %>><label for="behavior7-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior7-in-progress" name="progress" value="in-progress" <%= inProgressChecked %>><label for="behavior7-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior7-completed" name="progress" value="completed" <%= completedChecked %>><label for="behavior7-completed"> Completed</label><br>
+                        <% } else { %>
+                            <input type="radio" id="behavior7-not-started" name="progress" value="not-started"><label for="behavior7-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior7-in-progress" name="progress" value="in-progress"><label for="behavior7-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior7-completed" name="progress" value="completed"><label for="behavior7-completed"> Completed</label><br>
+                        <% } %>       
+                    </div>
+                    <div style="display: flex; align-items: center; padding-left: 20px;">
+                        <label for="behavior7-comments" style="color: darkgoldenrod; margin: 10px;"><b>Comments:</b></label>
+                        <% if (filteredBehaviors7.length > 0) { %>
+                            <% const behavior = filteredBehaviors7[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <textarea class="notes" id="behavior7-comments" name="comments" placeholder="Enter comments..."><%= behavior.comments %></textarea>
+                        <% } else { %>
+                            <textarea class="notes" id="behavior7-comments" name="comments" placeholder="Enter comments..."></textarea>
+                        <% } %>
+                    </div>
+                </div>
+                <input type="hidden" name="behaviorName" value="Counter Surfing">
+                <button type="submit" style="margin: 20px; padding: 10px 20px; background-color:#04b89afa; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+            </form>
+
+            <form id="behaviorFormDigging" class="behavior-behavior" action="/submitBehavior" method="POST">
+                <h2>Behavior: Digging</h2>
+                <input type="hidden" name="behaviorUser" id="behaviorUserDigging" value="">
+                <input type="hidden" name="behaviorPet" id="behaviorPetDigging" value="">
+                <img src="images/Digging.jpeg" alt="Digging">
+                <input type="hidden" name="behaviorImg" value="images/Digging.jpeg">
+                <div class="behavior-details">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Description:</b> Training to discourage excessive digging in inappropriate areas.</p>
+                    <input type="hidden" name="behaviorDesc" value=" Training to discourage excessive digging in inappropriate areas.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Objective:</b> Redirect the dog's digging behavior to more acceptable locations or activities.</p>
+                    <input type="hidden" name="behaviorObj" value=" Redirect the dog's digging behavior to more acceptable locations or activities.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Techniques Used:</b> Providing designated digging areas, mental stimulation, exercise.</p>
+                    <input type="hidden" name="behaviorTech" value=" Providing designated digging areas, mental stimulation, exercise.">
+                    <div class="behavior-status">
+                        <p style="color: darkgoldenrod;"><b>Status:</b></p>
+                        <% const filteredBehaviors8 = behaviors.filter(behavior => behavior.behaviorUser === petUser && behavior.behaviorName === "Digging"); %>
+                        <% if (filteredBehaviors8.length > 0) { %>
+                            <% const behavior = filteredBehaviors8[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <input type="radio" id="behavior8-not-started" name="progress" value="not-started" <%= notStartedChecked %>><label for="behavior8-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior8-in-progress" name="progress" value="in-progress" <%= inProgressChecked %>><label for="behavior8-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior8-completed" name="progress" value="completed" <%= completedChecked %>><label for="behavior8-completed"> Completed</label><br>
+                        <% } else { %>
+                            <input type="radio" id="behavior8-not-started" name="progress" value="not-started"><label for="behavior8-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior8-in-progress" name="progress" value="in-progress"><label for="behavior8-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior8-completed" name="progress" value="completed"><label for="behavior8-completed"> Completed</label><br>
+                        <% } %>       
+                    </div>
+                    <div style="display: flex; align-items: center; padding-left: 20px;">
+                        <label for="behavior8-comments" style="color: darkgoldenrod; margin: 10px;"><b>Comments:</b></label>
+                        <% if (filteredBehaviors8.length > 0) { %>
+                            <% const behavior = filteredBehaviors8[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <textarea class="notes" id="behavior8-comments" name="comments" placeholder="Enter comments..."><%= behavior.comments %></textarea>
+                        <% } else { %>
+                            <textarea class="notes" id="behavior8-comments" name="comments" placeholder="Enter comments..."></textarea>
+                        <% } %>
+                    </div>
+                </div>
+                <input type="hidden" name="behaviorName" value="Digging">
+                <button type="submit" style="margin: 20px; padding: 10px 20px; background-color:#04b89afa; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+            </form>
+
+            <form id="behaviorFormDashing" class="behavior-behavior" action="/submitBehavior" method="POST">
+                <h2>Behavior: Door Dashing</h2>
+                <input type="hidden" name="behaviorUser" id="behaviorUserDashing" value="">
+                <input type="hidden" name="behaviorPet" id="behaviorPetDashing" value="">
+                <img src="images/Dashing.jpeg" alt="Door Dashing">
+                <input type="hidden" name="behaviorImg" value="images/Dashing.jpeg">
+                <div class="behavior-details">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Description:</b> Training to prevent the dog from rushing out of doors or gates.</p>
+                    <input type="hidden" name="behaviorDesc" value=" Training to prevent the dog from rushing out of doors or gates.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Objective:</b> Teach the dog to wait calmly and not dart through open doors.</p>
+                    <input type="hidden" name="behaviorObj" value=" Teach the dog to wait calmly and not dart through open doors.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Techniques Used:</b> Door manners training, impulse control exercises, positive reinforcement.</p>
+                    <input type="hidden" name="behaviorTech" value=" Door manners training, impulse control exercises, positive reinforcement.">
+                    <div class="behavior-status">
+                        <p style="color: darkgoldenrod;"><b>Status:</b></p>
+                        <% const filteredBehaviors9 = behaviors.filter(behavior => behavior.behaviorUser === petUser && behavior.behaviorName === "Door Dashing"); %>
+                        <% if (filteredBehaviors9.length > 0) { %>
+                            <% const behavior = filteredBehaviors9[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <input type="radio" id="behavior9-not-started" name="progress" value="not-started" <%= notStartedChecked %>><label for="behavior9-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior9-in-progress" name="progress" value="in-progress" <%= inProgressChecked %>><label for="behavior9-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior9-completed" name="progress" value="completed" <%= completedChecked %>><label for="behavior9-completed"> Completed</label><br>
+                        <% } else { %>
+                            <input type="radio" id="behavior9-not-started" name="progress" value="not-started"><label for="behavior9-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior9-in-progress" name="progress" value="in-progress"><label for="behavior9-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior9-completed" name="progress" value="completed"><label for="behavior9-completed"> Completed</label><br>
+                        <% } %>       
+                    </div>
+                    <div style="display: flex; align-items: center; padding-left: 20px;">
+                        <label for="behavior9-comments" style="color: darkgoldenrod; margin: 10px;"><b>Comments:</b></label>
+                        <% if (filteredBehaviors9.length > 0) { %>
+                            <% const behavior = filteredBehaviors9[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <textarea class="notes" id="behavior9-comments" name="comments" placeholder="Enter comments..."><%= behavior.comments %></textarea>
+                        <% } else { %>
+                            <textarea class="notes" id="behavior9-comments" name="comments" placeholder="Enter comments..."></textarea>
+                        <% } %>
+                    </div>
+                </div>
+                <input type="hidden" name="behaviorName" value="Door Dashing">
+                <button type="submit" style="margin: 20px; padding: 10px 20px; background-color:#04b89afa; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+            </form>
+
+
+            <form id="behaviorFormFear" class="behavior-behavior" action="/submitBehavior" method="POST">
+                <h2>Behavior: Fear of Loud Noises</h2>
+                <input type="hidden" name="behaviorUser" id="behaviorUserFear" value="">
+                <input type="hidden" name="behaviorPet" id="behaviorPetFear" value="">
+                <img src="images/Fear.jpeg" alt="Fear of Loud Noises">
+                <input type="hidden" name="behaviorImg" value="images/Fear.jpeg">
+                <div class="behavior-details">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Description:</b> Training to help the dog cope and overcome fear of loud noises.</p>
+                    <input type="hidden" name="behaviorDesc" value=" Training to help the dog cope and overcome fear of loud noises.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Objective:</b> Reduce anxiety and fear responses to thunderstorms, fireworks.</p>
+                    <input type="hidden" name="behaviorObj" value=" Reduce anxiety and fear responses to thunderstorms, fireworks.">
+                    <p><b style="color: darkgoldenrod; font-size: medium;">Techniques Used:</b> Desensitization, counterconditioning, providing safe spaces.</p>
+                    <input type="hidden" name="behaviorTech" value=" Desensitization, counterconditioning, providing safe spaces.">
+                    <div class="behavior-status">
+                        <p style="color: darkgoldenrod;"><b>Status:</b></p>
+                        <% const filteredBehaviors10 = behaviors.filter(behavior => behavior.behaviorUser === petUser && behavior.behaviorName === "Fear of Loud Noises"); %>
+                        <% if (filteredBehaviors10.length > 0) { %>
+                            <% const behavior = filteredBehaviors10[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <input type="radio" id="behavior10-not-started" name="progress" value="not-started" <%= notStartedChecked %>><label for="behavior10-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior10-in-progress" name="progress" value="in-progress" <%= inProgressChecked %>><label for="behavior10-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior10-completed" name="progress" value="completed" <%= completedChecked %>><label for="behavior10-completed"> Completed</label><br>
+                        <% } else { %>
+                            <input type="radio" id="behavior10-not-started" name="progress" value="not-started"><label for="behavior10-not-started"> Not Started</label><br>
+                            <input type="radio" id="behavior10-in-progress" name="progress" value="in-progress"><label for="behavior10-in-progress"> In Progress</label><br>
+                            <input type="radio" id="behavior10-completed" name="progress" value="completed"><label for="behavior10-completed"> Completed</label><br>
+                        <% } %>       
+                    </div>
+                    <div style="display: flex; align-items: center; padding-left: 20px;">
+                        <label for="behavior10-comments" style="color: darkgoldenrod; margin: 10px;"><b>Comments:</b></label>
+                        <% if (filteredBehaviors10.length > 0) { %>
+                            <% const behavior = filteredBehaviors10[0]; %>
+                            <% var notStartedChecked = behavior.progress === 'not-started' ? 'checked' : ''; %>
+                            <% var inProgressChecked = behavior.progress === 'in-progress' ? 'checked' : ''; %>
+                            <% var completedChecked = behavior.progress === 'completed' ? 'checked' : ''; %>
+                            <textarea class="notes" id="behavior10-comments" name="comments" placeholder="Enter comments..."><%= behavior.comments %></textarea>
+                        <% } else { %>
+                            <textarea class="notes" id="behavior10-comments" name="comments" placeholder="Enter comments..."></textarea>
+                        <% } %>
+                    </div>
+                </div>
+                <input type="hidden" name="behaviorName" value="Fear of Loud Noises">
+                <button type="submit" style="margin: 20px; padding: 10px 20px; background-color:#04b89afa; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Save</button>
+            </form>
+
+    
+
+        </div>
+        <footer>
+            <div class="footer-modern-panel text-center">
+                <div class="container">
+                    <p class="rights"><span>&copy;&nbsp;</span><span class="copyright-year"></span><span>&nbsp;</span><span>TrainWithTail</span><span>. All Rights Reserved.&nbsp;</span><a href="privacy-policy.html">Privacy Policy</a></p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+<div class="snackbars" id="form-output-global"></div>
+
+
+<script src="js/core.min.js"></script>
+<script src="js/script.js"></script>
+<script src="js/behaviorUser.js"></script>
+</body>
+
+</html>

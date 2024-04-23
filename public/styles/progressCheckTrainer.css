@@ -1,0 +1,78 @@
+.behaviorContainer {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.progressContainer {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.behavior-behavior {
+    width: 48%;
+    background-color: #eff2ed;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-color: darkgoldenrod;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.behavior-behavior img {
+    /* width: 400px; */
+    /* height: 300px; */
+    margin-bottom: 20px;
+}
+
+.behavior-behavior video {
+    /* width: 400px; */
+    /* height: 300px; */
+    margin: 20px;
+}
+.behavior-details {
+    flex: 1;
+    width: 100%;
+}
+.behavior-behavior h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 30px;
+    color: #f33636e0;
+    font-family: cursive;
+}
+.behavior-status input[type="radio"] {
+    margin: auto;
+}
+.notes {
+    /* width: calc(100% - 30px); */
+    height: 30px;
+    width: 400px;
+}
+@media (max-width: 768px) {
+    .behavior-behavior {
+        width: 100%;
+    }
+}
+
+.not-started {
+    color: red; /* Example color for 'not-started' progress */
+    font-weight: bolder;
+}
+
+.in-progress {
+    color: orange; /* Example color for 'in-progress' progress */
+    font-weight: bolder;
+}
+
+.completed {
+    color: green; /* Example color for 'completed' progress */
+    font-weight: bolder;
+}

@@ -1,0 +1,12 @@
+.behavior-box {
+    margin-bottom: 20px;
+}
+
+.behavior-details {
+    display: none;
+    margin-top: 10px;
+}
+
+.progress:checked~.behavior-details {
+    display: block;
+}
