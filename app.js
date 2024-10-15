@@ -1,4 +1,5 @@
 // Import required modules
+require('dotenv').config(); // Ensure you have dotenv configured if using .env files
 const express = require('express'); // Importing Express framework
 const mongoose = require('mongoose'); // Importing Mongoose for MongoDB interaction
 const bodyParser = require('body-parser'); // Importing body-parser for parsing incoming request bodies
@@ -8,8 +9,6 @@ const helmet = require('helmet'); // Importing Helmet for security middleware
 
 // Initialize Express application
 const app = express();
-
-
 
 // Serve static files from 'public' directory
 app.use(express.static(path.join(__dirname, 'public')));
@@ -41,26 +40,22 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-require('dotenv').config(); // Make sure this is at the top of your file
+const uri = process.env.MONGO_URI;
 
-const MongoClient = require('mongodb').MongoClient;
-
-// Ensure the MONGO_URI is correctly defined before using it
-const uri = process.env.MONGO_URI; // Make sure this line is before the MongoClient usage
-
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
-client.connect(err => {
-    if (err) {
-        console.error('Error connecting to MongoDB:', err);
-        return;
+async function connectDB() {
+    try {
+        await mongoose.connect(uri, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            serverSelectionTimeoutMS: 30000, // Increase timeout for server selection
+        });
+        console.log('Connected to MongoDB with Mongoose successfully');
+    } catch (error) {
+        console.error('Error connecting to MongoDB with Mongoose:', error);
     }
-    console.log('Connected to MongoDB successfully');
-    // Your database operations go here
+}
 
-    client.close(); // Don't forget to close the connection
-});
-
+connectDB();
 
 
 // Event listener for MongoDB connection error
@@ -265,7 +260,6 @@ app.post('/getBehaviorStatus', async (req, res) => {
         res.status(500).send('Error fetching behavior statuses');
     }
 });
-
 
 //Handle page load
 app.get('/getBehavior', async (req, res) => {
