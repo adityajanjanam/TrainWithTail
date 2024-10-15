@@ -41,8 +41,27 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// Connect to MongoDB database named 'trainwithtail'
-mongoose.connect('mongodb://localhost:27017/trainwithtail', { useNewUrlParser: true, useUnifiedTopology: true });
+require('dotenv').config(); // Make sure this is at the top of your file
+
+const MongoClient = require('mongodb').MongoClient;
+
+// Ensure the MONGO_URI is correctly defined before using it
+const uri = process.env.MONGO_URI; // Make sure this line is before the MongoClient usage
+
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+client.connect(err => {
+    if (err) {
+        console.error('Error connecting to MongoDB:', err);
+        return;
+    }
+    console.log('Connected to MongoDB successfully');
+    // Your database operations go here
+
+    client.close(); // Don't forget to close the connection
+});
+
+
 
 // Event listener for MongoDB connection error
 mongoose.connection.on('error', (err) => {
