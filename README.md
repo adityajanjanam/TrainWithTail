@@ -72,6 +72,6 @@ Pull requests are welcome! For major changes, please open an issue first to disc
 
 **Aditya Janjanam**  
 [LinkedIn](https://www.linkedin.com/in/adityajanjanam/)  
-[Website](https://adityajanjanam.com)
+[Portfolio](https://adityajanjanam.com)
 
 Feel free to reach out for collaboration, questions, or feedback!
