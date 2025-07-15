@@ -63,7 +63,7 @@
                         <div class="rd-navbar-main">
                             <div class="rd-navbar-nav-wrap">
                                 <ul class="rd-navbar-nav">
-                                    <% if (session.username) { %>
+                                    <% if (session && session.username) { %>
                                         <% if (session.role === 'Customer') { %>
                                             <li class="rd-nav-item active"><a class="rd-nav-link" href="/home">Home</a>
                                             </li>
@@ -113,6 +113,8 @@
     <div class="thankyou" style="margin-bottom: 160px; margin-top: 100px;">
         <h1>Thank You!</h1>
         <p>Your form has been submitted successfully. We will contact you soon.</p>
+        <a href="/home" class="button button-primary-outline">Return to Home</a>
+        <a href="/ContactForm" class="button button-primary-outline">Submit Another Form</a>
     </div>
     
 

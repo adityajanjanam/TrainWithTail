@@ -58,7 +58,7 @@
                   <div class="rd-navbar-brand"><a class="brand" href="/home">TrainWithTail</a>
                   </div>
                 </div>
-                <% if (session.username) { %>
+                <% if (session && session.username) { %>
                   <% if (session.role === 'Customer') { %>
                       <div class="rd-navbar-button"><a class="button button-primary-outline button-sm button-icon button-icon-left" href="/ContactForm"><span class="icon mdi mdi-email-outline icon-size-m"></span>Book Training</a></div>
                   <% } else if (session.role === 'Trainer') { %>
@@ -74,7 +74,7 @@
                 <div class="rd-navbar-nav-wrap">
                   <!-- RD Navbar Nav-->
                   <ul class="rd-navbar-nav">
-                    <% if (session.username) { %>
+                    <% if (session && session.username) { %>
                       <% if (session.role === 'Customer') { %>
                           <li class="rd-nav-item active"><a class="rd-nav-link" href="/home">Home</a>
                           </li>
