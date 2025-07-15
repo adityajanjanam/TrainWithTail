@@ -1,11 +1,22 @@
 // Import required modules
 require('dotenv').config(); // Ensure you have dotenv configured if using .env files
+
+// Environment variable validation
+if (!process.env.MONGO_URI) {
+    console.error('FATAL ERROR: MONGO_URI is not defined in environment variables.');
+    process.exit(1);
+}
+if (!process.env.SESSION_SECRET) {
+    console.error('FATAL ERROR: SESSION_SECRET is not defined in environment variables.');
+    process.exit(1);
+}
 const express = require('express'); // Importing Express framework
 const mongoose = require('mongoose'); // Importing Mongoose for MongoDB interaction
 const bodyParser = require('body-parser'); // Importing body-parser for parsing incoming request bodies
 const session = require('express-session'); // Importing express-session for session management
 const path = require('path'); // Importing path for handling file paths
 const helmet = require('helmet'); // Importing Helmet for security middleware
+const { body, validationResult } = require('express-validator');
 
 // Initialize Express application
 const app = express();
@@ -45,8 +56,6 @@ const uri = process.env.MONGO_URI;
 async function connectDB() {
     try {
         await mongoose.connect(uri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
             serverSelectionTimeoutMS: 30000, // Increase timeout for server selection
         });
         console.log('Connected to MongoDB with Mongoose successfully');
@@ -63,67 +72,27 @@ mongoose.connection.on('error', (err) => {
     console.error('MongoDB connection error:', err);
 });
 
-const ContactForm = mongoose.model('ContactForm', {
-    name: String,
-    phone: String,
-    email: String,
-    petname: String,
-});
-
-const User = mongoose.model('User', {
-    name: String,
-    petName: String,
-    petBreed: String,
-    password: String,
-    role: String,
-});
-
-const Product = mongoose.model('Product', {
-    name: String,
-    price: Number,
-    quantity: Number,
-    total: Number,
-
-});
-
-// Define behavior schema
-const behaviorSchema = new mongoose.Schema({
-    behaviorName: String,
-    behaviorImg: String,
-    behaviorDesc: String,
-    behaviorObj: String,
-    behaviorTech: String,
-    progress: String,
-    comments: String,
-    behaviorUser: String,
-    behaviorPet: String,
-  });
-
-// Create behavior model
-const Behavior = mongoose.model('Behavior', behaviorSchema);
-
-module.exports = Behavior;
-
-// Define behavior schema
-const progressCheckSchema = new mongoose.Schema({
-    progressDay: String,
-    comments: String,
-    progressUser: String,
-    progressPet: String,
-    progressVideo: String,
-  });
-
-
-
-// Create behavior model
-const Progress = mongoose.model('Progress', progressCheckSchema);
-
-module.exports = Progress;
+const ContactForm = require('./models/ContactForm');
+const User = require('./models/User');
+const Product = require('./models/Product');
+const Behavior = require('./models/Behavior');
+const Progress = require('./models/Progress');
+const contactRoutes = require('./routes/contact');
+app.use('/', contactRoutes);
 
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(session({ secret: process.env.SESSION_SECRET || 'your_default_secret', resave: true, saveUninitialized: true }));
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'lax' : false
+    }
+}));
 app.use(helmet());
 
 app.set('views', path.join(__dirname, 'views'));
@@ -431,11 +400,6 @@ app.get('/userspace', (req, res) => {
     res.render('userspace', { username });
 });
 
-// Contact Form Route - GET
-app.get('/ContactForm', (req, res) => {
-    res.render('ContactForm');
-});
-
 // Signup Route - GET
 app.get('/signup', (req, res) => {
     res.render('signup');
@@ -443,34 +407,35 @@ app.get('/signup', (req, res) => {
 
 
 // customerSignupMethod Route - POST
-app.post('/customerSignupMethod', async (req, res) => {
+app.post('/customerSignupMethod', [
+    body('username').trim().isLength({ min: 3, max: 30 }).withMessage('Username must be 3-30 characters long').matches(/^[A-Za-z0-9_]+$/).withMessage('Username must contain only letters, numbers, and underscores'),
+    body('petName').trim().isLength({ min: 2, max: 30 }).withMessage('Pet name must be 2-30 characters long').matches(/^[A-Za-z ]+$/).withMessage('Pet name must contain only letters and spaces'),
+    body('petBreed').trim().isLength({ min: 2, max: 30 }).withMessage('Pet breed must be 2-30 characters long').matches(/^[A-Za-z ]+$/).withMessage('Pet breed must contain only letters and spaces'),
+    body('password').isLength({ min: 6, max: 50 }).withMessage('Password must be 6-50 characters long'),
+    body('confirmpassword').custom((value, { req }) => value === req.body.password).withMessage('Passwords do not match'),
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).render('signup', { errorMessage: errors.array().map(e => e.msg).join('<br>') });
+    }
     const { username, petName, petBreed, password } = req.body;
-
     try {
         // Check if the user already exists
         const existingUser = await User.findOne({ name: username });
-
         if (existingUser) {
-            // If the user already exists, handle accordingly
             return res.render('signup', { errorMessage: 'Username already exists. Choose a different username.' });
         }
-
         // If the user doesn't exist, create and save a new user
         const newUser = new User({
             name: username,
             petName: petName,
             petBreed: petBreed,
             password: password,
-            role: 'Customer', // set the role here as a string
+            role: 'Customer',
         });
-
         await newUser.save();
-
-        // Store username in the session
         req.session.username = username;
-        req.session.role = 'Customer'; // set the role in the session
-
-        // Redirect to the home page after successful signup
+        req.session.role = 'Customer';
         res.redirect('/home');
     } catch (err) {
         console.error('Error during signup:', err);
@@ -573,10 +538,19 @@ app.post('/customerLoginMethod', async (req, res) => {
 
 
 // ContactForm Route - POST
-app.post('/ContactForm', async (req, res) => {
-    const { name, phone, email, petname } = req.body;
+app.post('/ContactForm', [
+    body('name').trim().isLength({ min: 2, max: 50 }).withMessage('Name must be 2-50 characters long').matches(/^[A-Za-z ]+$/).withMessage('Name must contain only letters and spaces'),
+    body('phone').matches(/^\d{3}-\d{3}-\d{4}$/).withMessage('Phone number must be in the format xxx-xxx-xxxx'),
+    body('email').isEmail().withMessage('Invalid email address'),
+    body('petname').trim().isLength({ min: 2, max: 30 }).withMessage('Pet name must be 2-30 characters long').matches(/^[A-Za-z ]+$/).withMessage('Pet name must contain only letters and spaces'),
+    body('address').trim().isLength({ min: 5, max: 100 }).withMessage('Address must be 5-100 characters long'),
+], async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        return res.status(400).render('ContactForm', { errors: errors.array() });
+    }
+    const { name, phone, email, petname, address } = req.body;
     console.log('Form data:', req.body);
-
     try {
         // Save the form data to the database
         const newContactForm = new ContactForm({
@@ -584,10 +558,9 @@ app.post('/ContactForm', async (req, res) => {
             phone,
             email,
             petname,
+            address
         });
-
         await newContactForm.save();
-
         // Render the "Thank You" page
         res.redirect('/submittedform');
     } catch (err) {
@@ -697,6 +670,11 @@ app.get('/cart', (req, res) => {
 app.use((err, req, res, next) => {
     console.error('Error:', err);
     res.status(500).render('error', { errorMessage: 'Internal Server Error' });
+});
+
+// 404 handler (should be after all other routes)
+app.use((req, res, next) => {
+    res.status(404).render('error', { errorMessage: '404 - Page Not Found' });
 });
 
 // Server

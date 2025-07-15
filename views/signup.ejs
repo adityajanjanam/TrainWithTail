@@ -125,19 +125,19 @@
             <!-- Form for signup -->
             <form action="/customerSignupMethod" method="POST">
                 <label for="username"><b>Username:</b></label>
-                <input type="text" id="username" name="username" required>
+                <input type="text" id="username" name="username" required minlength="3" maxlength="30" pattern="[A-Za-z0-9_]+">
 
                 <label for="petName"><b>Pet Name:</b></label>
-                <input type="text" id="petName" name="petName" required>
+                <input type="text" id="petName" name="petName" required minlength="2" maxlength="30" pattern="[A-Za-z ]+">
 
                 <label for="petBreed"><b>Pet Breed:</b></label>
-                <input type="text" id="petBreed" name="petBreed" required>
+                <input type="text" id="petBreed" name="petBreed" required minlength="2" maxlength="30" pattern="[A-Za-z ]+">
 
                 <label for="password"><b>Password:</b></label>
-                <input type="password" id="password" name="password" required>
+                <input type="password" id="password" name="password" required minlength="6" maxlength="50">
 
                 <label for="confirmpassword"><b>Confirm Password:</b></label>
-                <input type="password" id="confirmpassword" name="confirmpassword" required>
+                <input type="password" id="confirmpassword" name="confirmpassword" required minlength="6" maxlength="50">
 
                 <button type="submit"><b>Signup</b></button>
             </form>

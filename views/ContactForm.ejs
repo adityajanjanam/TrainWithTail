@@ -131,22 +131,22 @@
                 <form action="/ContactForm" method="post">
                     <!-- Customer Name -->
                     <label for="name"><b>Full Name:</b></label>
-                    <input type="text" id="name" name="name" placeholder="First Name Last Name" >
+                    <input type="text" id="name" name="name" placeholder="First Name Last Name" required minlength="2" maxlength="50" pattern="[A-Za-z ]+">
             
                     <!-- Phone Number -->
                     <label for="phone"><b>Phone Number:</b></label>
-                    <input type="text" name="phone" pattern="\d{3}-\d{3}-\d{4}" placeholder="xxx-xxx-xxxx">
+                    <input type="text" name="phone" pattern="\d{3}-\d{3}-\d{4}" placeholder="xxx-xxx-xxxx" required title="Phone number must be in the format xxx-xxx-xxxx">
         
                      <!-- Email Adderess -->
                      <label for="email"><b>Email:</b></label>
-                     <input type="text" id="email" name="email" placeholder="abc123@xyz.com" >
+                     <input type="email" id="email" name="email" placeholder="abc123@xyz.com" required>
             
                      <!-- Pet's Name -->
                      <label for="petname"><b>Pet Name:</b></label>
-                     <input type="text" id="petname" name="petname" placeholder="Pet Name" >
+                     <input type="text" id="petname" name="petname" placeholder="Pet Name" required minlength="2" maxlength="30" pattern="[A-Za-z ]+">
         
                      <label for="address"><b>Address:</b></label>
-                     <input type="text" id="address" name="address" placeholder="Street, City, State, ZIP">
+                     <input type="text" id="address" name="address" placeholder="Street, City, State, ZIP" required minlength="5" maxlength="100">
         
                     <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
                         <div style="color: red;">
